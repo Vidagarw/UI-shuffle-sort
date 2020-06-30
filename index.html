@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Shuffle&Sort</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        .card {
+            width: 30%;
+            padding: 25px;
+            border: solid 1px #808080;
+            background-color: white;
+            display: inline-block;
+            font-size: 14pt;
+            text-align: center;
+            color: black;
+            margin: 3px;
+        }
+
+        .card .value {
+            font-size: 45pt;
+            font-family: sans-serif;
+        }
+
+        .button {
+            background: #72C3DC;
+            width: 95%;
+            height: 7%;
+            border-radius: 5px;
+            box-shadow: 0px 4px;
+        }
+
+        .center {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <span>
+                <h4 class="center">Shuffle and Sort</h4>
+            </span>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="col-lg-3 col-md-3 col-sm-3 pull-right">
+                <button class="btn button" onclick='shuffle()'>SHUFFLE</button>
+                <br />
+                <br />
+                <button class="btn button" onclick='onLoad()'>SORT</button>
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-9">
+                <div id="carddeck">
+                    <div class="col-lg-3 col-md-3 col-sm-3"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <span>
+                <h6 class="center">Shuffle and Sort by Vidhisha</h6>
+            </span>
+        </div>
+    </div>
+</body>
+
+<script>
+    var cards = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    var colors = [""];
+
+    function getNumberCards() {
+        var deck = new Array();
+
+        for (var i = 0; i < colors.length; i++) {
+            for (var x = 0; x < cards.length; x++) {
+                var card = { Value: cards[x], Color: colors[i] };
+                deck.push(card);
+            }
+        }
+
+        return deck;
+    }
+
+    function shuffle() {
+        for (var i = 0; i < 1000; i++) {
+            var position = Math.floor((Math.random() * deck.length));
+            var position1 = Math.floor((Math.random() * deck.length));
+            var tmp = deck[position];
+
+            deck[position] = deck[position1];
+            deck[position1] = tmp;
+        }
+        showNumberCards();
+    }
+
+    function showNumberCards() {
+        document.getElementById('carddeck').innerHTML = '';
+        for (var i = 0; i < deck.length; i++) {
+            var card = document.createElement("div");
+            var value = document.createElement("div");
+            var color = document.createElement("div");
+            card.className = "card";
+            value.className = "value";
+            color.className = "color " + deck[i].color;
+
+            value.innerHTML = deck[i].Value;
+            card.appendChild(value);
+            card.appendChild(color);
+
+            document.getElementById("carddeck").appendChild(card);
+        }
+    }
+
+    function onLoad() {
+        deck = getNumberCards();
+        showNumberCards();
+    }
+
+    window.onload = onLoad;
+</script>
+
+</html>
